@@ -1,0 +1,13 @@
+telegram:
+  token: 1965755698:AAGsnlOW7U2ds5qeMRRx4ICcgjweNBpU0bM
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+messaging:
+  text: 'Remember today'
+  cron:
+    expression: '*/10 * * * * *'
