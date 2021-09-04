@@ -1,7 +1,5 @@
 package com.planing.day.core.messages.telegram.entities;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.List;
 
 public class UpdateResponse {
