@@ -6,6 +6,7 @@ import com.planing.day.core.messages.telegram.Routes
 import com.planing.day.core.messages.telegram.entities.Message
 import com.planing.day.core.messages.telegram.entities.Update
 import com.planing.day.core.storage.Preserver
+import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -65,10 +66,10 @@ class SchedulerLogic(
         val dateFromFirstString = try {
             SimpleDateFormat(DATE_FORMAT).parse(stringsFromMessage[0])
         } catch (e: ParseException) {
-            e.printStackTrace()
-            throw e
+            logger.warn { "Error on the date parsing: ${e.stackTrace}" }
+            null
         }
-        saveChat(message.chat, dateFromFirstString, message.text)
+        dateFromFirstString?.let { saveChat(message.chat, it, message.text) }
     }
 
     private fun processOffset(allUpdates: List<Update>) {
@@ -101,7 +102,7 @@ class SchedulerLogic(
         return telegramRoutes.getUpdates(offset).result
     }
 
-    companion object {
+    companion object : KLogging() {
         const val START = "/start"
         const val PLANS = "/plans"
         const val DATE_FORMAT = "dd.MM.yyyy"
