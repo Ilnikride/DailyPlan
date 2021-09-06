@@ -7,7 +7,6 @@ import com.planing.day.core.messages.telegram.entities.Message
 import com.planing.day.core.messages.telegram.entities.Update
 import com.planing.day.core.storage.Preserver
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.text.ParseException
@@ -24,9 +23,6 @@ class SchedulerLogic(
     @Autowired
     private val preserver: Preserver
 ) {
-    @Value("\${messaging.text}")
-    private var text: String? = null
-
     @Volatile
     private var offset: Int? = 0
 
@@ -69,6 +65,7 @@ class SchedulerLogic(
         val dateFromFirstString = try {
             SimpleDateFormat(DATE_FORMAT).parse(stringsFromMessage[0])
         } catch (e: ParseException) {
+            e.printStackTrace()
             throw e
         }
         saveChat(message.chat, dateFromFirstString, message.text)
@@ -105,8 +102,8 @@ class SchedulerLogic(
     }
 
     companion object {
-        val START = "/start"
-        val PLANS = "/plans"
-        val DATE_FORMAT = "dd.MM.yyyy"
+        const val START = "/start"
+        const val PLANS = "/plans"
+        const val DATE_FORMAT = "dd.MM.yyyy"
     }
 }
