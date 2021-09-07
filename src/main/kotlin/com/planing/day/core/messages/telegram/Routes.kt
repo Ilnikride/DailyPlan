@@ -12,6 +12,7 @@ interface Routes {
     @GetMapping("/bot\${telegram.token}/getUpdates")
     fun getUpdates( @PathVariable offset: Int?): UpdateResponse
 
+    @SuppressWarnings("FunctionParameterNaming")
     @PostMapping(
         value = arrayOf("/bot\${telegram.token}/sendMessage"),
         headers = arrayOf("Content-Type", "application/json")
