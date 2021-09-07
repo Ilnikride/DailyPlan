@@ -10,6 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @SpringBootApplication
 class DayApplication
 
-fun main(args: Array<String>) {
+fun main(vararg args: String) {
     runApplication<DayApplication>(*args)
 }

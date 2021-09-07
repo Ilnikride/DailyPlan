@@ -8,6 +8,7 @@ class DayApplicationTests {
 
 	@Test
 	fun contextLoads() {
+		println("for detekt")
 	}
 
 }

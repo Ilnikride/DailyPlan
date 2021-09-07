@@ -1,7 +1,6 @@
 package com.planing.day.core.messages.telegram
 
 import com.planing.day.core.messages.telegram.entities.Message
-import com.planing.day.core.messages.telegram.entities.Update
 import com.planing.day.core.messages.telegram.entities.UpdateResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,6 +12,7 @@ interface Routes {
     @GetMapping("/bot\${telegram.token}/getUpdates")
     fun getUpdates( @PathVariable offset: Int?): UpdateResponse
 
+    @SuppressWarnings("FunctionParameterNaming")
     @PostMapping(
         value = arrayOf("/bot\${telegram.token}/sendMessage"),
         headers = arrayOf("Content-Type", "application/json")
